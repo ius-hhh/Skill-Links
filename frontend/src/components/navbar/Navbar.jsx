@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import './Navbar.scss'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
     const [active,setActive]= useState(false)
     const [open,setOpen]= useState(false)
 
+    const {pathname}=useLocation()
     const isActive=()=>{
         window.scrollY>0 ? setActive(true) : setActive(false)
     }
     useEffect(() =>{
-        // window.addEventListener("scroll",isActive);
+        window.addEventListener("scroll",isActive);
         return()=>{
             window.removeEventListener("scroll",isActive)
         }
@@ -23,14 +24,14 @@ const Navbar = () => {
     }
 
   return (
-    <div className={active?"navbar active":"navbar"}>
+    <div className={active || pathname !== "/" ?"navbar active":"navbar"}>
         <div className="container">
             <div className="logo">
-                {/* <Link to="/"> */}
+                <Link to="/" className='link'>
                 <span className='text'>Skill</span>
                 <span className='hypen'>-</span>
                 <span className='text'>Links</span>
-                {/* </Link> */}
+                </Link>
             </div>
             <div className="links">
                 <span>Business</span>
@@ -45,26 +46,40 @@ const Navbar = () => {
                     {open && <div className="options">
                         {currentUser?.isSeller && (
                                 <>
-                                    <span>Services</span>
-                                    <span>Add new Service</span>
+                                    <Link to='/myservices' className='link'>Services</Link>
+                                    <Link to='/add' className='link'>Add new Service</Link>
                                 </>
                             )
                         }
-                        <span>Orders</span>
-                        <span>Messages</span>
-                        <span>Logout</span>
+                        <Link className='link' to='/orders'>Orders</Link>
+                        <Link className='link' to='/messages'>Messages</Link>
+                        <Link className='link' to="/">Logout</Link>
                     </div>}
                 </div>} 
             </div>
             
         </div>
-            {active && (<>
+            {(active || pathname !== "/") && (<>
             <hr />
             <div className="menu">
-                <span>Test1</span>
-                <span>Test2</span>
-                <span>Test3</span>
-                <span>Test4</span>
+                <Link className='link' to='/'>
+                    Video & Photography
+                </Link>
+                <Link className='link' to='/'>
+                    Music & Audio
+                </Link>
+                <Link className='link' to='/'>
+                    Programming & Tech
+                </Link>
+                <Link className='link' to='/'>
+                    Business
+                </Link>
+                <Link className='link' to='/'>
+                    Lifestyle
+                </Link>
+                <Link className='link' to='/'>
+                    Digital Marketing
+                </Link>
             </div>
             </>
             )}
