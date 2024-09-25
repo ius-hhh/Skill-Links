@@ -28,9 +28,7 @@ const Navbar = () => {
         <div className="container">
             <div className="logo">
                 <Link to="/" className='link'>
-                <span className='text'>Skill</span>
-                <span className='hypen'>-</span>
-                <span className='text'>Links</span>
+                <span className='text'>Skill Links</span>
                 </Link>
             </div>
             <div className="links">
