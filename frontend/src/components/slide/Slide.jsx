@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Slide.scss"
-import Cards from '../cards/Cards'
+import Cards from '../catCards/CatCards'
 import Slider from 'infinite-react-carousel'
 import {cards} from '../../data'
 

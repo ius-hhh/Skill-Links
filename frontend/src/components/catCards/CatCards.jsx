@@ -1,11 +1,11 @@
 import React from 'react'
-import "./Cards.scss"
+import "./CatCards.scss"
 import {Link} from 'react-router-dom'
 
-const Cards = ({item}) => {
+const CatCards = ({item}) => {
   return (
     <Link to='services?cat=design'>
-    <div className="card">
+    <div className="CatCard">
     <img src={item.img} alt="" />
         <span className="desc">{item.desc}</span>
         <span className="title">{item.title}</span>
@@ -14,4 +14,4 @@ const Cards = ({item}) => {
   )
 }
 
-export default Cards
+export default CatCards
