@@ -7,6 +7,7 @@
     transition: 0.5s all ease;
     position: sticky;
     top: 0;
+    z-index: 999;
 
     &.active{
         background-color: rgb(243, 243, 243);
@@ -87,7 +88,7 @@
         border: 0.5px solid rgb(134, 134, 134);
     }
     .menu{
-        width: 1400px;
+        width: 1200px;
         padding: 10px;
         display: flex;
         justify-content: space-between;
