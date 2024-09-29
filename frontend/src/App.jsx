@@ -1,6 +1,6 @@
 import Navbar from "./components/navbar/navbar"
 import Home from "./pages/home/home"
-import Services from "./pages/services/services"
+import Services from "./pages/services/Services"
 import Service from "./pages/service/service"
 import Orders from "./pages/orders/orders"
 import MyServices from "./pages/myservices/myservices"
