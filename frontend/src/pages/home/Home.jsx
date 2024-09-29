@@ -91,7 +91,7 @@ const Home = () => {
             <img
               src="https://fiverr-res.cloudinary.com/q_auto,f_auto,w_870,dpr_2.0/v1/attachments/generic_asset/asset/d9c17ceebda44764b591a8074a898e63-1599597624768/business-desktop-870-x2.png"
               alt=""
-            />
+              />
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ const Home = () => {
           <ProjectCard key={card.id} card={card} />
         ))}
       </Slide>
-      <TrustedBy/>
+<TrustedBy/>
     </div>
   )
 }
