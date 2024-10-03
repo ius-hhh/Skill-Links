@@ -8,13 +8,16 @@ import orderRoute from './routes/orderRoute.js';
 import reviewRoute from './routes/reviewRoute.js';
 import serviceRoute from './routes/serviceRoute.js';
 import userRoute from './routes/userRoute.js';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 dotenv.config();
 const PORT= process.env.PORT || 5000;
 
+//Middleware 
 //Allows to put input from the user
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api/auth',authRoute)
 app.use('/api/conversations',conversationRoute)

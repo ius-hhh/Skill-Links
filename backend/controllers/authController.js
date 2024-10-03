@@ -1,5 +1,6 @@
 import User from '../models/userModel.js'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 export const register = async(req,res)=>{
     try {
@@ -21,8 +22,18 @@ export const login = async(req,res)=>{
         
         const validPassword = bcrypt.compareSync(req.body.password, user.password)
         if(!validPassword) return res.status(404).send("User credentials doesn't match.")
+
+        const token = jwt.sign(
+        {
+            id: user._id,
+            isSeller: user.isSeller,
+        },
+            process.env.JWT_KEY
+        );
+            
         const {password,...info} = user._doc
-        res.status(200).send(info)
+        
+        res.cookie("accessToken", token,{httpOnly: true,}).status(200).send(info);
 
     } catch (error) {
         res.status(500).send('Error in Login User => '+error.message)
