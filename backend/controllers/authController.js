@@ -1,8 +1,9 @@
 import User from '../models/userModel.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import createError from '../utils/createError.js';
 
-export const register = async(req,res)=>{
+export const register = async(req,res,next)=>{
     try {
         const hash = bcrypt.hashSync(req.body.password, 5);
         const newUser = new User({
@@ -12,16 +13,16 @@ export const register = async(req,res)=>{
         await newUser.save()
         res.status(201).send("User registered successfully")
     } catch (error) {
-        res.status(500).send('Error in Register User => '+error.message)
+        next(error)
     }
 }
-export const login = async(req,res)=>{
+export const login = async(req,res,next)=>{
     try {
         const user = await User.findOne({username: req.body.username})
-        if(!user) return res.status(404).send("User not found")
+        if(!user) return next(createError(404,"User not found"))
         
         const validPassword = bcrypt.compareSync(req.body.password, user.password)
-        if(!validPassword) return res.status(404).send("User credentials doesn't match.")
+        if(!validPassword) return next(createError(404,"User credentials doesn't match."))
 
         const token = jwt.sign(
         {
@@ -36,7 +37,7 @@ export const login = async(req,res)=>{
         res.cookie("accessToken", token,{httpOnly: true,}).status(200).send(info);
 
     } catch (error) {
-        res.status(500).send('Error in Login User => '+error.message)
+        return next(error)
     }
 }
 export const logout = async(req,res)=>{

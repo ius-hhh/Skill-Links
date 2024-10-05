@@ -27,6 +27,13 @@ app.use('/api/reviews',reviewRoute)
 app.use('/api/services',serviceRoute)
 app.use('/api/users',userRoute)
 
+app.use((error,req,res,next)=>{
+    const errorStatus = error.status || 500;
+    const errorMessage = error.message || "Something went wrong!";
+
+  return res.status(errorStatus).send(errorMessage);
+}) 
+
 app.listen(PORT,()=>{
     connectDB();
     console.log(`Server is running on port ${PORT}`);
