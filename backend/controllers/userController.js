@@ -11,7 +11,3 @@ export const deleteUser = async (req,res,next) =>{
         res.status(200).send("User deleted Successfully")
 
 }
-
-export const logout = async (req, res) =>{
-
-}
