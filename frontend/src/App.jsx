@@ -9,6 +9,7 @@ import Login from "./pages/login/Login"
 import Messages from "./pages/messages/Messages"
 import Message from "./pages/message/Message"
 import Footer from "./components/footer/Footer"
+import Register from "./pages/register/Register"
 import { createBrowserRouter,RouterProvider,Outlet } from "react-router-dom"
 import "./App.scss"
 
@@ -43,6 +44,9 @@ function App() {
         },{
           path:"/orders",
           element:<Orders/>,
+        },{
+          path:"/register",
+          element:<Register/>,
         },{
           path:"/myservices",
           element:<MyServices/>,
