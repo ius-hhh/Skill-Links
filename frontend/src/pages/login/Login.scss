@@ -1,0 +1,68 @@
+.login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    form {
+      width: 360px;
+      padding: 100px 0px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  
+      h1 {
+        color: rgb(0, 0, 0);
+        margin-bottom: 20px;
+      }
+  
+      label {
+        color: rgb(0, 0, 0);
+        font-size: 18px;
+      }
+  
+      input,
+      textarea {
+        padding: 20px;
+        border: 1px solid rgb(17, 17, 17);
+      }
+  
+      button {
+        border: none;
+        padding: 20px;
+        color: white;
+        font-weight: 500;
+        font-size: 18px;
+        background-color: #1dbf73;
+        cursor: pointer;
+      }
+  
+      span{
+        color: red;
+        font-size: 12px;
+      }
+      .error {
+        color: #e74c3c; // Red color for error message
+        font-size: 16px;
+        margin-top: 10px;
+        text-align: center;
+        font-weight: bold;
+        border: 1px solid #e74c3c; // Optional: Add a border to make it more visible
+        padding: 8px 12px;
+        background-color: #fce4e4; // Light red background to make it stand out
+        border-radius: 4px;
+        
+        // Animation for fade-in effect
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+      }
+      
+      // Animation keyframe for smooth appearance
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      
+    }
+  }

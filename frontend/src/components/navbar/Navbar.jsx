@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import './Navbar.scss'
 import { Link, useLocation } from 'react-router-dom'
+import newRequest from '../../utils/newRequest'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const [active,setActive]= useState(false)
     const [open,setOpen]= useState(false)
 
     const {pathname}=useLocation()
+
+    const navigate = useNavigate();
     const isActive=()=>{
         window.scrollY>0 ? setActive(true) : setActive(false)
     }
@@ -17,11 +21,18 @@ const Navbar = () => {
         }
     },[]);
 
-    const currentUser ={
-        id:1,
-        username:"John Doe",
-        isSeller:true
+    const currentUser =JSON.parse(localStorage.getItem("currentUser"))
+
+    const handleLogout = async ()=>{
+        try {
+            const res = await newRequest.post("auth/logout");
+            localStorage.removeItem("currentUser");
+            navigate("/")
+        } catch (error) {
+            console.log(error);
+        }
     }
+
 
   return (
     <div className={active || pathname !== "/" ?"navbar active":"navbar"}>
@@ -39,7 +50,7 @@ const Navbar = () => {
                 {!currentUser?.isSeller && <span>Become a Seller</span>}
                 {!currentUser&&<button>Join</button>}
                 {currentUser&& <div className="user" onClick={()=>setOpen(!open)}>
-                    <img src="https://fastly.picsum.photos/id/58/1280/853.jpg?hmac=YO3QnOm9TpyM5DqsJjoM4CHg8oIq4cMWLpd9ALoP908" alt="" />
+                    <img src={currentUser.img || "/img/noavatar.jpg"} alt="" />
                     <span>{currentUser?.username}</span>
                     {open && <div className="options">
                         {currentUser?.isSeller && (
@@ -51,7 +62,7 @@ const Navbar = () => {
                         }
                         <Link className='link' to='/orders'>Orders</Link>
                         <Link className='link' to='/messages'>Messages</Link>
-                        <Link className='link' to="/">Logout</Link>
+                        <Link className='link' onClick={handleLogout}>Logout</Link>
                     </div>}
                 </div>} 
             </div>

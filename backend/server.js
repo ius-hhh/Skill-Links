@@ -9,6 +9,7 @@ import reviewRoute from './routes/reviewRoute.js';
 import serviceRoute from './routes/serviceRoute.js';
 import userRoute from './routes/userRoute.js';
 import cookieParser from 'cookie-parser';
+import cors from "cors"
 
 const app = express();
 dotenv.config();
@@ -16,6 +17,10 @@ const PORT= process.env.PORT || 5000;
 
 //Middleware 
 //Allows to put input from the user
+app.use(cors({
+  origin: 'http://localhost:5173', // Allow requests from this origin
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+}));
 app.use(express.json());
 app.use(cookieParser());
 

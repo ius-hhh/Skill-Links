@@ -5,6 +5,7 @@ import Service from "./pages/service/service"
 import Orders from "./pages/orders/orders"
 import MyServices from "./pages/myservices/myservices"
 import Add from "./pages/add/add"
+import Login from "./pages/login/Login"
 import Messages from "./pages/messages/Messages"
 import Message from "./pages/message/Message"
 import Footer from "./components/footer/Footer"
@@ -36,6 +37,9 @@ function App() {
         },{
           path:"/service/:id",
           element:<Service/>,
+        },{
+          path: "/login",
+          element: <Login/>,
         },{
           path:"/orders",
           element:<Orders/>,
