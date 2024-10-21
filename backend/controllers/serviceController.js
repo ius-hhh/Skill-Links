@@ -29,5 +29,15 @@ export const deleteService = async (req,res,next) =>{
         next(err);
       }
 }
-export const getService = async (req,res,next) =>{}
-export const getServices = async (req,res,next) =>{}
+export const getService = async (req,res,next) =>{
+    try {
+        const service = await Service.findById(req.params.id);
+        if (!service) next(createError(404, "Service not found!"));
+        res.status(200).send(service);
+      } catch (err) {
+        next(err);
+      }
+}
+export const getServices = async (req,res,next) =>{
+    
+}
