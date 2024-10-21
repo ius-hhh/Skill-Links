@@ -39,5 +39,22 @@ export const getService = async (req,res,next) =>{
       }
 }
 export const getServices = async (req,res,next) =>{
-    
+    const q = req.query;
+  const filters = {
+    ...(q.userId && { userId: q.userId }),
+    ...(q.cat && { cat: q.cat }),
+    ...((q.min || q.max) && {
+      price: {
+        ...(q.min && { $gt: q.min }),
+        ...(q.max && { $lt: q.max }),
+      },
+    }),
+    ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+  };
+  try {
+    const services= await Service.find(filters).sort({ [q.sort]: -1 });
+    res.status(200).send(services);
+  } catch (err) {
+    next(err);
+  }
 }
