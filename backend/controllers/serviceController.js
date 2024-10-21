@@ -18,7 +18,16 @@ export const createService = async (req,res,next) =>{
       }
 }
 export const deleteService = async (req,res,next) =>{
+    try {
+        const service = await Service.findById(req.params.id);
+        if (service.userId !== req.userId)
+          return next(createError(403, "You can delete only your service!"));
     
+        await Service.findByIdAndDelete(req.params.id);
+        res.status(200).send("Service has been deleted!");
+      } catch (err) {
+        next(err);
+      }
 }
 export const getService = async (req,res,next) =>{}
 export const getServices = async (req,res,next) =>{}
